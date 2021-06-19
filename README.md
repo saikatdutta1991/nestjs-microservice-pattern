@@ -1,2 +1,4 @@
 # nestjs-sample-blogging-app
-NestJS sample blogging app with microservice architechture
+NestJS sample blogging app using
+- Microservice Architechture
+- Monorepo Directory Structure
