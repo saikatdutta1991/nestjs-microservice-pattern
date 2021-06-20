@@ -7,11 +7,7 @@ export enum ServiceName {
 export default () => ({
   services: {
     ['api-gateway']: {
-      port:
-        parseInt(
-          process.env.SERVICE_API_GATEWAY_PORT ||
-            process.env.SERVICE_DEFAULT_PORT,
-        ) || 3000,
+      port: parseInt(process.env.SERVICE_API_GATEWAY_PORT) || 3000,
     },
     auth: {
       name: ServiceName.AUTH,
