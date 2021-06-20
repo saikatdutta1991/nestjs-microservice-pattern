@@ -26,8 +26,9 @@
     "@nestjs/core": "^7.6.15",
     "@nestjs/microservices": "^7.6.18",
     "@nestjs/platform-express": "^7.6.15",
+    "amqp-connection-manager": "^3.2.2",
+    "amqplib": "^0.8.0",
     "compression": "^1.7.4",
-    "nats": "^2.0.6",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6"

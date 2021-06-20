@@ -1,5 +1,9 @@
 import { Transport } from '@nestjs/microservices';
 
+export enum ServiceName {
+  AUTH = 'AUTH_SERVICE',
+}
+
 export default () => ({
   services: {
     ['api-gateway']: {
@@ -10,14 +14,14 @@ export default () => ({
         ) || 3000,
     },
     auth: {
-      name: 'AUTH_SERVICE',
+      name: ServiceName.AUTH,
       transportOptions: {
-        transport: Transport.NATS,
+        transport: Transport.RMQ,
         options: {
-          url: process.env.SERVICE_NATS_URL,
+          urls: [process.env.SERVICE_RMQ_URL],
+          queue: 'auth_service_queue',
         },
       },
-      port: 0,
     },
   },
 });

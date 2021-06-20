@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApiGatewayController } from './api-gateway.controller';
-import serviceConfiguration from 'config/service.configuration';
+import serviceConfiguration, {
+  ServiceName,
+} from 'config/service.configuration';
+import { ClientProxyFactory } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -10,6 +13,17 @@ import serviceConfiguration from 'config/service.configuration';
     }),
   ],
   controllers: [ApiGatewayController],
-  providers: [],
+  providers: [
+    {
+      provide: ServiceName.AUTH,
+      useFactory: (configService: ConfigService) => {
+        const authSvcOptions = configService.get(
+          'services.auth.transportOptions',
+        );
+        return ClientProxyFactory.create(authSvcOptions);
+      },
+      inject: [ConfigService],
+    },
+  ],
 })
 export class ApiGatewayModule {}

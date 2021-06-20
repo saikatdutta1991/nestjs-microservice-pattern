@@ -1,9 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class AuthController {
-  @Get()
-  getHello(): string {
-    return 'Auth service';
+  @MessagePattern({ cmd: 'getHello' })
+  getHello(name: string): string {
+    return `Hello ${name}!`;
   }
 }
