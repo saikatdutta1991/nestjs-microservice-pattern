@@ -13,3 +13,11 @@ NestJS sample blogging app using
 # Inside root directory of the repository
 > nest generate app [microservice-name]
 ```
+
+## Starting development 
+```sh
+# Start RabbitMQ
+> docker-compose -f docker-compose.dev.yml up
+# Start service
+> yarn start:dev [servicename]
+```
