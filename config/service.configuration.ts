@@ -1,7 +1,7 @@
 import { Transport } from '@nestjs/microservices';
 
 export enum ServiceName {
-  AUTH = 'AUTH_SERVICE',
+  AUTH = 'auth_service',
 }
 
 export default () => ({
@@ -19,7 +19,7 @@ export default () => ({
         transport: Transport.RMQ,
         options: {
           urls: [process.env.SERVICE_RMQ_URL],
-          queue: 'auth_service_queue',
+          queue: ServiceName.AUTH,
         },
       },
     },
