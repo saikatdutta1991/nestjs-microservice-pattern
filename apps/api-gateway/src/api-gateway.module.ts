@@ -4,12 +4,13 @@ import { ApiGatewayController } from './api-gateway.controller';
 import serviceConfiguration, {
   ServiceName,
 } from 'config/service.configuration';
+import configuration from '../config/configuration';
 import { ClientProxyFactory } from '@nestjs/microservices';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [serviceConfiguration],
+      load: [serviceConfiguration, configuration],
     }),
   ],
   controllers: [ApiGatewayController],

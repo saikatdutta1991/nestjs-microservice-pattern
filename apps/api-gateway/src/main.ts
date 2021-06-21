@@ -8,7 +8,7 @@ async function bootstrap() {
   app.use(compression());
 
   const configService = app.get<ConfigService>(ConfigService);
-  const { port } = configService.get('services[api-gateway]');
+  const port = configService.get('port');
   await app.listen(port, () => console.log('Api gateway is listening'));
 }
 bootstrap();
