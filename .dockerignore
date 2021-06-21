@@ -1,0 +1,9 @@
+.bin
+.github
+.mongodb
+build
+dist
+docs
+lambdas
+node_modules
+test

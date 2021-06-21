@@ -1,6 +1,42 @@
-version: '3'
+version: '3.7'
 
 services:
+  api-gateway:
+    build:
+      context: .
+      target: development
+      dockerfile: ./apps/api-gateway/Dockerfile
+    container_name: api-gateway
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+    command: yarn start:dev api-gateway
+
+  auth:
+    build:
+      context: .
+      target: development
+      dockerfile: ./apps/auth/Dockerfile
+    container_name: auth
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+    command: yarn start:dev auth
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -18,3 +54,6 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes: 
+  node_modules:

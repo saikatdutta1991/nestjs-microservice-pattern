@@ -14,10 +14,17 @@ NestJS sample blogging app using
 > nest generate app [microservice-name]
 ```
 
-## Starting development 
+## Starting development
+
 ```sh
 # Start RabbitMQ
 > docker-compose -f docker-compose.dev.yml up
 # Start service
 > yarn start:dev [servicename]
+```
+
+## Build production docker image
+
+```sh
+> docker build -f apps/auth/Dockerfile -t auth-service .
 ```
