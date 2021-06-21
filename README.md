@@ -17,10 +17,7 @@ NestJS sample blogging app using
 ## Starting development
 
 ```sh
-# Start RabbitMQ
 > docker-compose -f docker-compose.dev.yml up
-# Start service
-> yarn start:dev [servicename]
 ```
 
 ## Build production docker image
