@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AccountModule } from './account.module';
 import { ConfigService } from '@nestjs/config';
-import { MicroserviceOptions } from '@nestjs/microservices';
+import { MicroserviceOptions, RpcException } from '@nestjs/microservices';
+import { ValidationPipe } from '@nestjs/common';
+import { ValidationError } from '@nestjs/common';
 
 async function bootstrap() {
   const temp = await NestFactory.create(AccountModule);
@@ -12,6 +14,13 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AccountModule,
     transportOptions,
+  );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      exceptionFactory: (validationErrors: ValidationError[] = []) => {
+        return new RpcException(validationErrors);
+      },
+    }),
   );
   app.listen(() => console.log('Account microservice is listening'));
 }

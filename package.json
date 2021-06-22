@@ -30,6 +30,8 @@
     "amqp-connection-manager": "^3.2.2",
     "amqplib": "^0.8.0",
     "bcrypt": "^5.0.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
     "compression": "^1.7.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.14",
