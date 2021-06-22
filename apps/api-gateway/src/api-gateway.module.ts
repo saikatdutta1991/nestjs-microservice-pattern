@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ApiGatewayController } from './api-gateway.controller';
 import serviceConfiguration, {
   ServiceName,
 } from 'config/service.configuration';
 import configuration from '../config/configuration';
 import { ClientProxyFactory } from '@nestjs/microservices';
+import { AccountController } from './account.controller';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { ClientProxyFactory } from '@nestjs/microservices';
       load: [serviceConfiguration, configuration],
     }),
   ],
-  controllers: [ApiGatewayController],
+  controllers: [AccountController],
   providers: [
     {
       provide: ServiceName.ACCOUNT,

@@ -4,6 +4,8 @@ import { AccountController } from './account.controller';
 import serviceConfiguration from 'config/service.configuration';
 import configuration from '../config/configuration';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AccountService } from './account.service';
+import { Account, AccountSchema } from './schemas/account.schema';
 
 @Module({
   imports: [
@@ -17,8 +19,9 @@ import { MongooseModule } from '@nestjs/mongoose';
         uri: configService.get('MONGODB_URI'),
       }),
     }),
+    MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
   ],
   controllers: [AccountController],
-  providers: [],
+  providers: [AccountService],
 })
 export class AccountModule {}
