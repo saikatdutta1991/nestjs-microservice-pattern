@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AccountController } from './account.controller';
 import serviceConfiguration from 'config/service.configuration';
 import configuration from '../config/configuration';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AccountService } from './account.service';
 import { Account, AccountSchema } from './schemas/account.schema';
+import { AccountHelper } from './helpers/account.helper';
+import { CreateAccountCommand } from './commands/create-account.command';
+import { SigninAccountCommand } from './commands/signin-account.command';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { Account, AccountSchema } from './schemas/account.schema';
     }),
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
   ],
-  controllers: [AccountController],
-  providers: [AccountService],
+  providers: [AccountHelper],
+  controllers: [CreateAccountCommand, SigninAccountCommand],
 })
 export class AccountModule {}
