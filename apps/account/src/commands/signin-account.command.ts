@@ -3,7 +3,7 @@ import { MessagePattern, RpcException } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AccountCommand } from 'shared/commands/account.command';
-import { SigninAccountInput } from '../dto/account/signin-account.input';
+import { SigninAccountInput } from '../dto/signin-account.input';
 import { AccountHelper } from '../helpers/account.helper';
 import { Account, AccountDocument } from '../schemas/account.schema';
 
