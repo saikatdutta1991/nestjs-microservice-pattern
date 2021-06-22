@@ -1,4 +1,4 @@
-# nestjs-sample-blogging-app
+# nestjs-microservice-pattern
 
 NestJS sample blogging app using
 
