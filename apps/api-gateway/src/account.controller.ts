@@ -9,6 +9,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { ServiceName } from 'config/service.configuration';
 import { AccountCommand } from 'shared/commands/account.command';
 import { CreateAccountDto } from 'shared/dto/account/create-account.dto';
+import { SigninAccountDto } from 'shared/dto/account/signin-account.dto';
 
 @Controller('accounts')
 export class AccountController {
@@ -20,6 +21,16 @@ export class AccountController {
   public async createAccount(@Body() createdAccountDto: CreateAccountDto) {
     return await this.accountService
       .send({ cmd: AccountCommand.CREATE }, createdAccountDto)
+      .toPromise()
+      .catch((error) => {
+        throw new BadRequestException(error);
+      });
+  }
+
+  @Post('/signin')
+  public async signinAccount(@Body() signinAccountDto: SigninAccountDto) {
+    return await this.accountService
+      .send({ cmd: AccountCommand.SIGNIN }, signinAccountDto)
       .toPromise()
       .catch((error) => {
         throw new BadRequestException(error);

@@ -16,7 +16,7 @@ import { Account, AccountSchema } from './schemas/account.schema';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get('MONGODB_URI'),
+        uri: configService.get('mongodbUri'),
       }),
     }),
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),

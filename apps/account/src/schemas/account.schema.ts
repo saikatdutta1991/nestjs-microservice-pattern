@@ -12,7 +12,7 @@ export class Account {
   name: string;
 
   @Prop({ required: true })
-  password: string;
+  passwordHash: string;
 
   @Prop()
   refreshToken: string;
