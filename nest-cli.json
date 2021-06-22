@@ -8,13 +8,13 @@
     "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
   },
   "projects": {
-    "auth": {
+    "account": {
       "type": "application",
-      "root": "apps/auth",
+      "root": "apps/account",
       "entryFile": "main",
-      "sourceRoot": "apps/auth/src",
+      "sourceRoot": "apps/account/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/auth/tsconfig.app.json"
+        "tsConfigPath": "apps/account/tsconfig.app.json"
       }
     },
     "api-gateway": {

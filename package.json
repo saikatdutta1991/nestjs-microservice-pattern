@@ -1,5 +1,5 @@
 {
-  "name": "auth",
+  "name": "microservice-scaffolding",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -18,17 +18,19 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/auth/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/account/test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
     "@nestjs/config": "^0.6.3",
     "@nestjs/core": "^7.6.15",
     "@nestjs/microservices": "^7.6.18",
+    "@nestjs/mongoose": "^7.2.4",
     "@nestjs/platform-express": "^7.6.15",
     "amqp-connection-manager": "^3.2.2",
     "amqplib": "^0.8.0",
     "compression": "^1.7.4",
+    "mongoose": "^5.12.14",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6"

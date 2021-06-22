@@ -23,5 +23,5 @@ NestJS sample blogging app using
 ## Build production docker image
 
 ```sh
-> docker build -f apps/auth/Dockerfile -t auth-service .
+> docker build -f apps/account/Dockerfile -t account-service .
 ```

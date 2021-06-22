@@ -20,12 +20,12 @@ services:
       - rabbitmq
     command: yarn start:dev api-gateway
 
-  auth:
+  account:
     build:
       context: .
       target: development
-      dockerfile: ./apps/auth/Dockerfile
-    container_name: auth
+      dockerfile: ./apps/account/Dockerfile
+    container_name: account
     restart: unless-stopped
     env_file: .env
     volumes:
@@ -35,7 +35,8 @@ services:
       - app-network
     depends_on:
       - rabbitmq
-    command: yarn start:dev auth
+      - mongodb
+    command: yarn start:dev account
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -46,8 +47,23 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-    # volumes:
-    #   - rabbit-data:/var/lib/rabbitmq
+    volumes:
+      - ./.rabbit-data:/var/lib/rabbitmq
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo:4.2
+    container_name: mongodb
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./.mongodb:/data/db
     networks:
       - app-network
 
@@ -55,5 +71,5 @@ networks:
   app-network:
     driver: bridge
 
-volumes: 
+volumes:
   node_modules:

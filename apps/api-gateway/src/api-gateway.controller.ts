@@ -5,11 +5,13 @@ import { ServiceName } from 'config/service.configuration';
 @Controller()
 export class ApiGatewayController {
   constructor(
-    @Inject(ServiceName.AUTH) private readonly authService: ClientProxy,
+    @Inject(ServiceName.ACCOUNT) private readonly accountService: ClientProxy,
   ) {}
 
   @Get(':name')
   public async getHello(@Param('name') name = 'Default'): Promise<string> {
-    return await this.authService.send({ cmd: 'getHello' }, name).toPromise();
+    return await this.accountService
+      .send({ cmd: 'getHello' }, name)
+      .toPromise();
   }
 }

@@ -1,18 +1,18 @@
 import { Transport } from '@nestjs/microservices';
 
 export enum ServiceName {
-  AUTH = 'auth_service',
+  ACCOUNT = 'account_service',
 }
 
 export default () => ({
   services: {
-    auth: {
-      name: ServiceName.AUTH,
+    account: {
+      name: ServiceName.ACCOUNT,
       transportOptions: {
         transport: Transport.RMQ,
         options: {
           urls: [process.env.SERVICE_RMQ_URL],
-          queue: ServiceName.AUTH,
+          queue: ServiceName.ACCOUNT,
         },
       },
     },

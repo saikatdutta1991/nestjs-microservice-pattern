@@ -7,3 +7,4 @@ docs
 lambdas
 node_modules
 test
+.rabbit-data

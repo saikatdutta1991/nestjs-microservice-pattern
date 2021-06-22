@@ -16,12 +16,12 @@ import { ClientProxyFactory } from '@nestjs/microservices';
   controllers: [ApiGatewayController],
   providers: [
     {
-      provide: ServiceName.AUTH,
+      provide: ServiceName.ACCOUNT,
       useFactory: (configService: ConfigService) => {
-        const authSvcOptions = configService.get(
-          'services.auth.transportOptions',
+        const accountServiceOptions = configService.get(
+          'services.account.transportOptions',
         );
-        return ClientProxyFactory.create(authSvcOptions);
+        return ClientProxyFactory.create(accountServiceOptions);
       },
       inject: [ConfigService],
     },
