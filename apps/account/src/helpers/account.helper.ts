@@ -17,6 +17,10 @@ export class AccountHelper {
     private readonly configService: ConfigService,
   ) {}
 
+  public async getAccountById(accountId: string): Promise<AccountDocument> {
+    return await this.accountModel.findOne({ _id: accountId });
+  }
+
   public async getAccountByUsername(
     username: string,
   ): Promise<AccountDocument> {

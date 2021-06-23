@@ -8,6 +8,7 @@ import { AccountHelper } from './helpers/account.helper';
 import { CreateAccountCommand } from './commands/create-account.command';
 import { SigninAccountCommand } from './commands/signin-account.command';
 import { GetAccessTokenCommand } from './commands/get-access-token.command';
+import { GetAccountCommand } from './commands/get-account.command';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { GetAccessTokenCommand } from './commands/get-access-token.command';
     CreateAccountCommand,
     SigninAccountCommand,
     GetAccessTokenCommand,
+    GetAccountCommand,
   ],
 })
 export class AccountModule {}
