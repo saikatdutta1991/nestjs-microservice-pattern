@@ -40,6 +40,7 @@ export class AccountHelper {
   ): Promise<AccountDocument> {
     return await this.accountModel.findOneAndUpdate({ _id: accountId }, data, {
       new: true,
+      useFindAndModify: false,
     });
   }
 
