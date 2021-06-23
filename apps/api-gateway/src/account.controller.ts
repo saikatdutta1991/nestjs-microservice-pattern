@@ -7,9 +7,11 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ServiceName } from 'config/service.configuration';
-import { AccountCommand } from 'shared/commands/account.command';
-import { CreateAccountDto } from 'shared/dto/account/create-account.dto';
-import { SigninAccountDto } from 'shared/dto/account/signin-account.dto';
+import { AccountCommands } from 'shared/service-contracts/account/commands/account.commands';
+import { CreateAccountInput } from 'shared/service-contracts/account/commands/create-account/create-account.input';
+import { CreateAccountOutput } from 'shared/service-contracts/account/commands/create-account/create-account.output';
+import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
+import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
 
 @Controller('accounts')
 export class AccountController {
@@ -18,9 +20,12 @@ export class AccountController {
   ) {}
 
   @Post('/')
-  public async createAccount(@Body() createdAccountDto: CreateAccountDto) {
+  public async createAccount(@Body() createAccountInput: CreateAccountInput) {
     return await this.accountService
-      .send({ cmd: AccountCommand.CREATE }, createdAccountDto)
+      .send<CreateAccountOutput, CreateAccountInput>(
+        { cmd: AccountCommands.CREATE },
+        createAccountInput,
+      )
       .toPromise()
       .catch((error) => {
         throw new BadRequestException(error);
@@ -28,9 +33,12 @@ export class AccountController {
   }
 
   @Post('/signin')
-  public async signinAccount(@Body() signinAccountDto: SigninAccountDto) {
+  public async signinAccount(@Body() signinAccountInput: SigninAccountInput) {
     return await this.accountService
-      .send({ cmd: AccountCommand.SIGNIN }, signinAccountDto)
+      .send<SigninAccountOutput, SigninAccountInput>(
+        { cmd: AccountCommands.SIGNIN },
+        signinAccountInput,
+      )
       .toPromise()
       .catch((error) => {
         throw new BadRequestException(error);

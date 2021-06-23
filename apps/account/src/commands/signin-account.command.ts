@@ -1,26 +1,18 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, RpcException } from '@nestjs/microservices';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { AccountCommand } from 'shared/commands/account.command';
-import { SigninAccountInput } from '../dto/signin-account.input';
+import { AccountCommands } from 'shared/service-contracts/account/commands/account.commands';
+import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
+import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
 import { AccountHelper } from '../helpers/account.helper';
-import { Account, AccountDocument } from '../schemas/account.schema';
 
 @Controller()
 export class SigninAccountCommand {
-  constructor(
-    private readonly accountHelper: AccountHelper,
-    @InjectModel(Account.name)
-    private readonly accountModel: Model<AccountDocument>,
-  ) {}
+  constructor(private readonly accountHelper: AccountHelper) {}
 
-  @MessagePattern({ cmd: AccountCommand.SIGNIN })
-  public async signinAccount(signinAccountInput: SigninAccountInput): Promise<{
-    account: AccountDocument;
-    authToken: string;
-    refreshToken: string;
-  }> {
+  @MessagePattern({ cmd: AccountCommands.SIGNIN })
+  public async signinAccount(
+    signinAccountInput: SigninAccountInput,
+  ): Promise<SigninAccountOutput> {
     const { username, password } = signinAccountInput;
 
     const account = await this.accountHelper.getAccountByUsername(username);

@@ -7,7 +7,7 @@ export class CreateAccountInput {
   username: string;
 
   @IsOptional()
-  name: string;
+  name?: string;
 
   @IsNotEmpty()
   @IsString()

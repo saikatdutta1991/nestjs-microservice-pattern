@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { AccountType } from 'shared/enums/account-type.enum';
+import { AccountType } from 'shared/service-contracts/account/account-type.';
 
 export type AccountDocument = Account & Document;
 

@@ -1,24 +1,18 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, RpcException } from '@nestjs/microservices';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { AccountCommand } from 'shared/commands/account.command';
-import { CreateAccountInput } from '../dto/create-account.input';
+import { AccountCommands } from 'shared/service-contracts/account/commands/account.commands';
+import { CreateAccountInput } from 'shared/service-contracts/account/commands/create-account/create-account.input';
+import { CreateAccountOutput } from 'shared/service-contracts/account/commands/create-account/create-account.output';
 import { AccountHelper } from '../helpers/account.helper';
-import { Account, AccountDocument } from '../schemas/account.schema';
 
 @Controller()
 export class CreateAccountCommand {
-  constructor(
-    private readonly accountHelper: AccountHelper,
-    @InjectModel(Account.name)
-    private readonly accountModel: Model<AccountDocument>,
-  ) {}
+  constructor(private readonly accountHelper: AccountHelper) {}
 
-  @MessagePattern({ cmd: AccountCommand.CREATE })
+  @MessagePattern({ cmd: AccountCommands.CREATE })
   public async createAccount(
     createAccountInput: CreateAccountInput,
-  ): Promise<AccountDocument> {
+  ): Promise<CreateAccountOutput> {
     const { username, password } = createAccountInput;
 
     const existingAccount = await this.accountHelper.getAccountByUsername(
@@ -32,7 +26,6 @@ export class CreateAccountCommand {
       passwordHash: await this.accountHelper.hashPassword(password),
     });
 
-    const account = new this.accountModel(createAccountInput);
-    return await account.save();
+    return this.accountHelper.createAccount(createAccountInput);
   }
 }

@@ -22,6 +22,11 @@ export class AccountHelper {
     return await this.accountModel.findOne({ username });
   }
 
+  public async createAccount(data: any): Promise<AccountDocument> {
+    const account = new this.accountModel(data);
+    return await account.save();
+  }
+
   public async updateAccountById(
     accountId: string,
     data: any,

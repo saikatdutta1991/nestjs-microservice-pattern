@@ -1,4 +1,4 @@
-export enum AccountCommand {
+export enum AccountCommands {
   CREATE = 'createAccount',
   SIGNIN = 'signinAccount',
 }
