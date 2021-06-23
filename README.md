@@ -7,6 +7,8 @@ NestJS sample blogging app using
 - Interservice communication backed by RabbitMQ message broker
 - No service discovery required
 
+Since, this is a monorepo paradigm, the microservices are expected to be written in NodeJS/NestJS
+
 ## Creating new microservice
 
 ```sh
