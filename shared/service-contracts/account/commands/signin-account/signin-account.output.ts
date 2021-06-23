@@ -1,13 +1,7 @@
-import { AccountType } from '../../account-type.';
+import { Account } from '../../account';
 
-export class SigninAccountOutput {
-  account: {
-    type: AccountType;
-    username: string;
-    name: string;
-    passwordHash: string;
-    refreshToken: string;
-  };
+export interface SigninAccountOutput {
+  account: Account;
   accessToken: string;
   refreshToken: string;
 }
