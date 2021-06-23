@@ -30,14 +30,14 @@ export class SigninAccountCommand {
       { refreshToken },
     );
 
-    const authToken = this.accountHelper.generateAuthToken({
+    const accessToken = this.accountHelper.generateAccessToken({
       accountId: updatedAccount._id,
       username: updatedAccount.username,
     });
 
     return {
       account: updatedAccount,
-      authToken,
+      accessToken,
       refreshToken,
     };
   }

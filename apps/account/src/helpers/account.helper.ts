@@ -49,7 +49,7 @@ export class AccountHelper {
     return crypto.randomBytes(40).toString('hex');
   }
 
-  public generateAuthToken(data: {
+  public generateAccessToken(data: {
     accountId: string;
     username: string;
   }): string {

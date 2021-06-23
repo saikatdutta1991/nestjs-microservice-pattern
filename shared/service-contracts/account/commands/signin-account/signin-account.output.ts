@@ -8,6 +8,6 @@ export class SigninAccountOutput {
     passwordHash: string;
     refreshToken: string;
   };
-  authToken: string;
+  accessToken: string;
   refreshToken: string;
 }
