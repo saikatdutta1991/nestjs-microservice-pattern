@@ -25,7 +25,7 @@ export class GetAccessTokenCommand {
       accessToken: this.accountHelper.generateAccessToken({
         accountId: account._id,
         username: account.username,
-        type: account.type,
+        role: account.role,
       }),
     };
   }

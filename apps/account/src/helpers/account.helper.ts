@@ -7,7 +7,7 @@ import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { Account, AccountDocument } from '../schemas/account.schema';
 import { AUTH_TOKEN_EXPIRES_IN } from '../constants';
-import { AccountType } from 'shared/service-contracts/account/account-type.';
+import { AccountRoles } from 'shared/service-contracts/account/account-roles.';
 
 @Injectable()
 export class AccountHelper {
@@ -60,7 +60,7 @@ export class AccountHelper {
   public generateAccessToken(data: {
     accountId: string;
     username: string;
-    type: AccountType;
+    role: AccountRoles;
   }): string {
     return jwt.sign(data, this.configService.get('jwtSecret'), {
       expiresIn: AUTH_TOKEN_EXPIRES_IN,

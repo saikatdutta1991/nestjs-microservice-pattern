@@ -1,7 +1,7 @@
-import { AccountType } from './account-type.';
+import { AccountRoles } from './account-roles.';
 
 export interface Account {
-  type: AccountType;
+  role: AccountRoles;
   username: string;
   name: string;
   passwordHash: string;
