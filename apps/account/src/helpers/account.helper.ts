@@ -71,10 +71,10 @@ export class AccountHelper {
     });
   }
 
-  //   private verifyAuthToken(token: string): jwt.JwtPayload {
-  //     return jwt.verify(
-  //       token,
-  //       this.configService.get('jwtSecret'),
-  //     ) as jwt.JwtPayload;
-  //   }
+  public verifyAccessToken(token: string): jwt.JwtPayload {
+    return jwt.verify(
+      token,
+      this.configService.get('jwtSecret'),
+    ) as jwt.JwtPayload;
+  }
 }
