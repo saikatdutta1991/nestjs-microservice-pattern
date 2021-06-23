@@ -7,7 +7,6 @@ import {
   Headers,
   Get,
   Param,
-  UseGuards,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ServiceName } from 'config/service.configuration';
@@ -21,9 +20,7 @@ import { GetAccessTokenOutput } from 'shared/service-contracts/account/commands/
 import { GetAccountInput } from 'shared/service-contracts/account/commands/get-account/get-account.input';
 import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
 import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
-import { Roles } from './decorators/roles.decorator';
-import { AccessTokenGuard } from './guards/access-token.guard';
-import { AccountRolesGuard } from './guards/account-roles.guard';
+import { Auth } from './decorators/auth.decorator';
 
 @Controller('accounts')
 export class AccountController {
@@ -71,8 +68,7 @@ export class AccountController {
   }
 
   @Get('/:accountId')
-  @UseGuards(AccessTokenGuard, AccountRolesGuard)
-  @Roles(AccountRoles.USER)
+  @Auth(AccountRoles.USER)
   public async getAccountById(@Param('accountId') accountId: string) {
     return await this.accountService
       .send<Account, GetAccountInput>(
