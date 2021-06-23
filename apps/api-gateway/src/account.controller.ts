@@ -4,12 +4,16 @@ import {
   Controller,
   Inject,
   Post,
+  Headers,
+  Get,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ServiceName } from 'config/service.configuration';
 import { AccountCommands } from 'shared/service-contracts/account/commands/account.commands';
 import { CreateAccountInput } from 'shared/service-contracts/account/commands/create-account/create-account.input';
 import { CreateAccountOutput } from 'shared/service-contracts/account/commands/create-account/create-account.output';
+import { GetAccessTokenInput } from 'shared/service-contracts/account/commands/get-access-token/get-access-token.input';
+import { GetAccessTokenOutput } from 'shared/service-contracts/account/commands/get-access-token/get-access-token.output';
 import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
 import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
 
@@ -38,6 +42,19 @@ export class AccountController {
       .send<SigninAccountOutput, SigninAccountInput>(
         { cmd: AccountCommands.SIGNIN },
         signinAccountInput,
+      )
+      .toPromise()
+      .catch((error) => {
+        throw new BadRequestException(error);
+      });
+  }
+
+  @Get('/access-token')
+  public async getAccessToken(@Headers('refresh-token') refreshToken: string) {
+    return await this.accountService
+      .send<GetAccessTokenOutput, GetAccessTokenInput>(
+        { cmd: AccountCommands.ACCESS_TOKEN },
+        { refreshToken },
       )
       .toPromise()
       .catch((error) => {

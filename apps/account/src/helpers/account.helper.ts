@@ -22,6 +22,12 @@ export class AccountHelper {
     return await this.accountModel.findOne({ username });
   }
 
+  public async getAccountByRefreshToken(
+    refreshToken: string,
+  ): Promise<AccountDocument> {
+    return await this.accountModel.findOne({ refreshToken });
+  }
+
   public async createAccount(data: any): Promise<AccountDocument> {
     const account = new this.accountModel(data);
     return await account.save();

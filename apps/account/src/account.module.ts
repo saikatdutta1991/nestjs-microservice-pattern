@@ -7,6 +7,7 @@ import { Account, AccountSchema } from './schemas/account.schema';
 import { AccountHelper } from './helpers/account.helper';
 import { CreateAccountCommand } from './commands/create-account.command';
 import { SigninAccountCommand } from './commands/signin-account.command';
+import { GetAccessTokenCommand } from './commands/get-access-token.command';
 
 @Module({
   imports: [
@@ -23,6 +24,10 @@ import { SigninAccountCommand } from './commands/signin-account.command';
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
   ],
   providers: [AccountHelper],
-  controllers: [CreateAccountCommand, SigninAccountCommand],
+  controllers: [
+    CreateAccountCommand,
+    SigninAccountCommand,
+    GetAccessTokenCommand,
+  ],
 })
 export class AccountModule {}
