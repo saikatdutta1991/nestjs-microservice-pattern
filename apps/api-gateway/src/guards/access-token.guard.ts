@@ -13,6 +13,7 @@ import { VerifyAccessTokenOutput } from 'shared/service-contracts/account/comman
 
 @Injectable()
 export class AccessTokenGuard implements CanActivate {
+  public static ACCESS_TOKEN_PAYLOAD_KEY = 'accessTokenPayload';
   constructor(
     @Inject(ServiceName.ACCOUNT) private readonly accountService: ClientProxy,
   ) {}
@@ -29,7 +30,9 @@ export class AccessTokenGuard implements CanActivate {
         throw new UnauthorizedException(`Authorization token is invalid`);
       });
 
-    Object.assign(request, { accessTokenPayload });
+    Object.assign(request, {
+      [AccessTokenGuard.ACCESS_TOKEN_PAYLOAD_KEY]: accessTokenPayload,
+    });
     return true;
   }
 }

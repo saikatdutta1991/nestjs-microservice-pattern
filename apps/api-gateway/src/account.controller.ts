@@ -12,6 +12,7 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { ServiceName } from 'config/service.configuration';
 import { Account } from 'shared/service-contracts/account/account';
+import { AccountRoles } from 'shared/service-contracts/account/account-roles.';
 import { AccountCommands } from 'shared/service-contracts/account/commands/account.commands';
 import { CreateAccountInput } from 'shared/service-contracts/account/commands/create-account/create-account.input';
 import { CreateAccountOutput } from 'shared/service-contracts/account/commands/create-account/create-account.output';
@@ -20,7 +21,9 @@ import { GetAccessTokenOutput } from 'shared/service-contracts/account/commands/
 import { GetAccountInput } from 'shared/service-contracts/account/commands/get-account/get-account.input';
 import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
 import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
+import { Roles } from './decorators/roles.decorator';
 import { AccessTokenGuard } from './guards/access-token.guard';
+import { AccountRolesGuard } from './guards/account-roles.guard';
 
 @Controller('accounts')
 export class AccountController {
@@ -68,7 +71,8 @@ export class AccountController {
   }
 
   @Get('/:accountId')
-  @UseGuards(AccessTokenGuard)
+  @UseGuards(AccessTokenGuard, AccountRolesGuard)
+  @Roles(AccountRoles.USER)
   public async getAccountById(@Param('accountId') accountId: string) {
     return await this.accountService
       .send<Account, GetAccountInput>(
