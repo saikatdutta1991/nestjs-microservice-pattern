@@ -33,6 +33,7 @@ export class SigninAccountCommand {
     const accessToken = this.accountHelper.generateAccessToken({
       accountId: updatedAccount._id,
       username: updatedAccount.username,
+      type: updatedAccount.type,
     });
 
     return {
