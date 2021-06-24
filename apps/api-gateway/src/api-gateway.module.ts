@@ -6,12 +6,14 @@ import serviceConfiguration, {
 import configuration from '../config/configuration';
 import { ClientProxyFactory } from '@nestjs/microservices';
 import { AccountController } from './controllers/account.controller';
+import { GraphQLModule } from './graphql/graphql.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [serviceConfiguration, configuration],
     }),
+    GraphQLModule,
   ],
   controllers: [AccountController],
   providers: [
