@@ -20,7 +20,6 @@ import configuration from '../config/configuration';
         const accountServiceOptions = configService.get(
           'services.account.transportOptions',
         );
-        console.log({ accountServiceOptions });
         return ClientProxyFactory.create(accountServiceOptions);
       },
       inject: [ConfigService],
