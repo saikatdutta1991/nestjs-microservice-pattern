@@ -22,8 +22,8 @@ import { SigninAccountInput } from 'shared/service-contracts/account/commands/si
 import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
 import { Auth } from '../decorators/auth.decorator';
 import { SerializeOptions } from '../decorators/serialize.decorator';
-import { AccountDto } from '../dto/account.dto';
-import { SigninAccountDto } from '../dto/signin-account.dto';
+import { AccountResponse } from '../dto/account.response';
+import { SigninAccountResponse } from '../dto/signin-account.response';
 
 @Controller('accounts')
 export class AccountController {
@@ -32,10 +32,10 @@ export class AccountController {
   ) {}
 
   @Post('/')
-  @SerializeOptions({ transformClassRef: AccountDto })
+  @SerializeOptions({ transformClassRef: AccountResponse })
   public async createAccount(
     @Body() createAccountInput: CreateAccountInput,
-  ): Promise<AccountDto> {
+  ): Promise<AccountResponse> {
     return await this.accountService
       .send<CreateAccountOutput, CreateAccountInput>(
         { cmd: AccountCommands.CREATE },
@@ -48,10 +48,10 @@ export class AccountController {
   }
 
   @Post('/signin')
-  @SerializeOptions({ transformClassRef: SigninAccountDto })
+  @SerializeOptions({ transformClassRef: SigninAccountResponse })
   public async signinAccount(
     @Body() signinAccountInput: SigninAccountInput,
-  ): Promise<SigninAccountDto> {
+  ): Promise<SigninAccountResponse> {
     return await this.accountService
       .send<SigninAccountOutput, SigninAccountInput>(
         { cmd: AccountCommands.SIGNIN },
@@ -78,10 +78,10 @@ export class AccountController {
 
   @Get('/:accountId')
   @Auth(AccountRoles.USER)
-  @SerializeOptions({ transformClassRef: AccountDto })
+  @SerializeOptions({ transformClassRef: AccountResponse })
   public async getAccountById(
     @Param('accountId') accountId: string,
-  ): Promise<AccountDto> {
+  ): Promise<AccountResponse> {
     return await this.accountService
       .send<Account, GetAccountInput>(
         { cmd: AccountCommands.GET_ACCOUNT },

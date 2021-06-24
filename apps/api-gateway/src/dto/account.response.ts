@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { AccountRoles } from 'shared/service-contracts/account/account-roles.';
 
-export class AccountDto {
+export class AccountResponse {
   role: AccountRoles;
 
   username: string;
