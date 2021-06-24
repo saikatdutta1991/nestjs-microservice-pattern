@@ -1,11 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, ObjectId } from 'mongoose';
 import { AccountRoles } from 'shared/service-contracts/account/account-roles.';
 
 export type AccountDocument = Account & Document;
 
 @Schema()
 export class Account {
+  _id: ObjectId;
+
   @Prop({ type: AccountRoles, enum: AccountRoles, default: AccountRoles.USER })
   role: AccountRoles;
 
