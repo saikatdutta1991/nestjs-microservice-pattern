@@ -1,6 +1,6 @@
 # nestjs-microservice-pattern
 
-NestJS sample blogging app using & features
+Features
 
 - Microservice Architechture
 - Monorepo Directory Structure
