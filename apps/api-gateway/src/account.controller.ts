@@ -21,6 +21,9 @@ import { GetAccountInput } from 'shared/service-contracts/account/commands/get-a
 import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
 import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
 import { Auth } from './decorators/auth.decorator';
+import { SerializeOptions } from './decorators/serialize.decorator';
+import { AccountDto } from './dto/account.dto';
+import { SigninAccountDto } from './dto/signin-account.dto';
 
 @Controller('accounts')
 export class AccountController {
@@ -29,7 +32,10 @@ export class AccountController {
   ) {}
 
   @Post('/')
-  public async createAccount(@Body() createAccountInput: CreateAccountInput) {
+  @SerializeOptions({ transformClassRef: AccountDto })
+  public async createAccount(
+    @Body() createAccountInput: CreateAccountInput,
+  ): Promise<AccountDto> {
     return await this.accountService
       .send<CreateAccountOutput, CreateAccountInput>(
         { cmd: AccountCommands.CREATE },
@@ -42,7 +48,10 @@ export class AccountController {
   }
 
   @Post('/signin')
-  public async signinAccount(@Body() signinAccountInput: SigninAccountInput) {
+  @SerializeOptions({ transformClassRef: SigninAccountDto })
+  public async signinAccount(
+    @Body() signinAccountInput: SigninAccountInput,
+  ): Promise<SigninAccountDto> {
     return await this.accountService
       .send<SigninAccountOutput, SigninAccountInput>(
         { cmd: AccountCommands.SIGNIN },
@@ -69,7 +78,10 @@ export class AccountController {
 
   @Get('/:accountId')
   @Auth(AccountRoles.USER)
-  public async getAccountById(@Param('accountId') accountId: string) {
+  @SerializeOptions({ transformClassRef: AccountDto })
+  public async getAccountById(
+    @Param('accountId') accountId: string,
+  ): Promise<AccountDto> {
     return await this.accountService
       .send<Account, GetAccountInput>(
         { cmd: AccountCommands.GET_ACCOUNT },
