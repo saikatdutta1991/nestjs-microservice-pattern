@@ -5,6 +5,7 @@ import {
   Inject,
   UnauthorizedException,
 } from '@nestjs/common';
+import { GqlExecutionContext } from '@nestjs/graphql';
 import { ClientProxy } from '@nestjs/microservices';
 import { ServiceName } from 'config/service.configuration';
 import { AccountCommands } from 'shared/service-contracts/account/commands/account.commands';
@@ -18,7 +19,8 @@ export class AccessTokenGuard implements CanActivate {
     @Inject(ServiceName.ACCOUNT) private readonly accountService: ClientProxy,
   ) {}
   public async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest();
+    const gqlContext = GqlExecutionContext.create(context);
+    const request = gqlContext.getContext().req;
     const accessToken = request.header('Authorization');
     const accessTokenPayload = await this.accountService
       .send<VerifyAccessTokenOutput, VerifyAccessTokenInput>(

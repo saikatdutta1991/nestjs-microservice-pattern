@@ -1,11 +1,14 @@
 # nestjs-microservice-pattern
 
-NestJS sample blogging app using
+NestJS sample blogging app using & features
 
 - Microservice Architechture
 - Monorepo Directory Structure
 - Interservice communication backed by RabbitMQ message broker
 - No service discovery required
+- Graphql
+- Auth token guard
+- Account role guard
 
 Since, this is a monorepo paradigm, the microservices are expected to be written in NodeJS/NestJS
 
