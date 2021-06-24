@@ -20,10 +20,10 @@ import { GetAccessTokenOutput } from 'shared/service-contracts/account/commands/
 import { GetAccountInput } from 'shared/service-contracts/account/commands/get-account/get-account.input';
 import { SigninAccountInput } from 'shared/service-contracts/account/commands/signin-account/signin-account.input';
 import { SigninAccountOutput } from 'shared/service-contracts/account/commands/signin-account/signin-account.output';
-import { Auth } from './decorators/auth.decorator';
-import { SerializeOptions } from './decorators/serialize.decorator';
-import { AccountDto } from './dto/account.dto';
-import { SigninAccountDto } from './dto/signin-account.dto';
+import { Auth } from '../decorators/auth.decorator';
+import { SerializeOptions } from '../decorators/serialize.decorator';
+import { AccountDto } from '../dto/account.dto';
+import { SigninAccountDto } from '../dto/signin-account.dto';
 
 @Controller('accounts')
 export class AccountController {

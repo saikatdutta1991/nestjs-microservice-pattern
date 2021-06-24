@@ -5,7 +5,7 @@ import serviceConfiguration, {
 } from 'config/service.configuration';
 import configuration from '../config/configuration';
 import { ClientProxyFactory } from '@nestjs/microservices';
-import { AccountController } from './account.controller';
+import { AccountController } from './controllers/account.controller';
 
 @Module({
   imports: [
