@@ -5,6 +5,9 @@ registerEnumType(AccountRoles, { name: 'AccountRoles' });
 
 @ObjectType()
 export class Account {
+  @Field()
+  _id: string;
+
   @Field(() => AccountRoles)
   role: AccountRoles;
 

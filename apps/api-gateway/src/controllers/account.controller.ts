@@ -31,22 +31,6 @@ export class AccountController {
     @Inject(ServiceName.ACCOUNT) private readonly accountService: ClientProxy,
   ) {}
 
-  @Post('/')
-  @SerializeOptions({ transformClassRef: AccountResponse })
-  public async createAccount(
-    @Body() createAccountInput: CreateAccountInput,
-  ): Promise<AccountResponse> {
-    return await this.accountService
-      .send<CreateAccountOutput, CreateAccountInput>(
-        { cmd: AccountCommands.CREATE },
-        createAccountInput,
-      )
-      .toPromise()
-      .catch((error) => {
-        throw new BadRequestException(error);
-      });
-  }
-
   @Post('/signin')
   @SerializeOptions({ transformClassRef: SigninAccountResponse })
   public async signinAccount(
