@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { MicroserviceOptions, RpcException } from '@nestjs/microservices';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationError } from '@nestjs/common';
+import { CustomRMQTransportStrategy } from 'lib/custom-rmq-transport.strategy';
 
 async function bootstrap() {
   const temp = await NestFactory.create(AccountModule);
@@ -13,7 +14,9 @@ async function bootstrap() {
   );
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AccountModule,
-    transportOptions,
+    {
+      strategy: new CustomRMQTransportStrategy(transportOptions.options),
+    },
   );
   app.useGlobalPipes(
     new ValidationPipe({

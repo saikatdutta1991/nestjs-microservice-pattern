@@ -13,6 +13,7 @@ export default () => ({
         options: {
           urls: [process.env.SERVICE_RMQ_URL],
           queue: ServiceName.ACCOUNT,
+          commonFanoutExchange: 'amq.fanout',
         },
       },
     },
