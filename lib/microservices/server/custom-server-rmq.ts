@@ -2,7 +2,7 @@ import { RmqOptions, ServerRMQ } from '@nestjs/microservices';
 
 type RmqOptionsNew = RmqOptions & { commonFanoutExchange: string };
 
-export class CustomRMQTransportStrategy extends ServerRMQ {
+export class CustomServerRMQ extends ServerRMQ {
   public async setupChannel(channel: any, callback: () => any) {
     const noAck = this.getOptionsProp(this.options, 'noAck', true);
     await channel.bindQueue(
