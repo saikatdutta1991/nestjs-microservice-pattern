@@ -9,13 +9,12 @@ import { CustomRMQTransportStrategy } from 'lib/custom-rmq-transport.strategy';
 async function bootstrap() {
   const temp = await NestFactory.create(AccountModule);
   const configService = temp.get<ConfigService>(ConfigService);
-  const transportOptions = configService.get(
-    'services.account.transportOptions',
-  );
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AccountModule,
     {
-      strategy: new CustomRMQTransportStrategy(transportOptions.options),
+      strategy: new CustomRMQTransportStrategy(
+        configService.get('services.account.options'),
+      ),
     },
   );
   app.useGlobalPipes(

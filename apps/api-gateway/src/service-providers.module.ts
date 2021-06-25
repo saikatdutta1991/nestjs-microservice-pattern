@@ -3,8 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import serviceConfiguration, {
   ServiceName,
 } from 'config/service.configuration';
-import { ClientProxyFactory } from '@nestjs/microservices';
 import configuration from '../config/configuration';
+import { CustomClientRMQ } from 'lib/custom-client-rmq';
 
 @Global()
 @Module({
@@ -17,10 +17,8 @@ import configuration from '../config/configuration';
     {
       provide: ServiceName.ACCOUNT,
       useFactory: (configService: ConfigService) => {
-        const accountServiceOptions = configService.get(
-          'services.account.transportOptions',
-        );
-        return ClientProxyFactory.create(accountServiceOptions);
+        const options = configService.get('services.account.options');
+        return new CustomClientRMQ(options);
       },
       inject: [ConfigService],
     },
