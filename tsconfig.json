@@ -11,6 +11,13 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "paths": {}
+    "paths": {
+      "@app/custom-microservice": [
+        "libs/custom-microservice/src"
+      ],
+      "@app/custom-microservice/*": [
+        "libs/custom-microservice/src/*"
+      ]
+    }
   }
 }

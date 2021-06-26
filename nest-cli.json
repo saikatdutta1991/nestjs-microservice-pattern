@@ -25,6 +25,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
       }
+    },
+    "custom-microservice": {
+      "type": "library",
+      "root": "libs/custom-microservice",
+      "entryFile": "index",
+      "sourceRoot": "libs/custom-microservice/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/custom-microservice/tsconfig.lib.json"
+      }
     }
   }
 }
