@@ -4,16 +4,19 @@ import { ConfigService } from '@nestjs/config';
 import { MicroserviceOptions, RpcException } from '@nestjs/microservices';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationError } from '@nestjs/common';
+import { CustomServerRMQ } from '@app/custom-microservice/server/custom-server-rmq';
+import { ServiceName } from 'config/service.configuration';
 
 async function bootstrap() {
   const temp = await NestFactory.create(AccountModule);
   const configService = temp.get<ConfigService>(ConfigService);
-  const transportOptions = configService.get(
-    'services.account.transportOptions',
-  );
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AccountModule,
-    transportOptions,
+    {
+      strategy: new CustomServerRMQ(
+        configService.get(`services.${ServiceName.ACCOUNT}.options`),
+      ),
+    },
   );
   app.useGlobalPipes(
     new ValidationPipe({
