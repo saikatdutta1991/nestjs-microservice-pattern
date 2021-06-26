@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { MicroserviceOptions, RpcException } from '@nestjs/microservices';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationError } from '@nestjs/common';
-import { CustomServerRMQ } from 'lib/microservices/server/custom-server-rmq';
+import { CustomServerRMQ } from 'libs/microservices/server/custom-server-rmq';
 
 async function bootstrap() {
   const temp = await NestFactory.create(AccountModule);

@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import serviceConfiguration, {
   ServiceName,
 } from 'config/service.configuration';
-import { CustomClientRMQ } from 'lib/microservices/client/custom-client-rmq';
+import { CustomClientRMQ } from 'libs/microservices/client/custom-client-rmq';
 import configuration from '../config/configuration';
 
 @Global()
