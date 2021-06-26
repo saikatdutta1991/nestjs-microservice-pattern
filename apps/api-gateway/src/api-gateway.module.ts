@@ -13,7 +13,7 @@ import { GraphQLModule } from './graphql/graphql.module';
       load: [serviceConfiguration, configuration],
     }),
     ServiceClientModule.register({
-      services: [ServiceName.ACCOUNT, ServiceName.COMMON_EVENT_BUS],
+      services: [ServiceName.ACCOUNT],
     }),
     GraphQLModule,
   ],
