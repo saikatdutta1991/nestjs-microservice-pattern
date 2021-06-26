@@ -89,7 +89,9 @@
     ],
     "moduleNameMapper": {
       "@app/custom-microservice/(.*)": "<rootDir>/libs/custom-microservice/src/$1",
-      "@app/custom-microservice": "<rootDir>/libs/custom-microservice/src"
+      "@app/custom-microservice": "<rootDir>/libs/custom-microservice/src",
+      "@app/service-client/(.*)": "<rootDir>/libs/service-client/src/$1",
+      "@app/service-client": "<rootDir>/libs/service-client/src"
     }
   }
 }

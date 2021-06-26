@@ -17,6 +17,12 @@
       ],
       "@app/custom-microservice/*": [
         "libs/custom-microservice/src/*"
+      ],
+      "@app/service-client": [
+        "libs/service-client/src"
+      ],
+      "@app/service-client/*": [
+        "libs/service-client/src/*"
       ]
     }
   }

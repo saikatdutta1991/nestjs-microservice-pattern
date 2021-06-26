@@ -1,10 +1,18 @@
 export enum ServiceName {
-  ACCOUNT = 'account_service',
+  ACCOUNT = 'accountService',
+  COMMON_EVENT_BUS = 'commonEventBus',
 }
 
 export default () => ({
   services: {
-    account: {
+    commonEventBus: {
+      name: ServiceName.COMMON_EVENT_BUS,
+      options: {
+        urls: [process.env.SERVICE_RMQ_URL],
+        commonFanoutExchange: 'amq.fanout',
+      },
+    },
+    accountService: {
       name: ServiceName.ACCOUNT,
       options: {
         urls: [process.env.SERVICE_RMQ_URL],
